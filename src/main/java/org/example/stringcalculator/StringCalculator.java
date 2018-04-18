@@ -1,5 +1,7 @@
 package org.example.stringcalculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,20 +50,19 @@ public class StringCalculator {
 
     private static int addNumbersSplitByPattern(String numbersString, String splitPattern) {
         int sum = 0;
+        List<String> negativeNumbers = new ArrayList<>();
         for (String number : numbersString.split(splitPattern)) {
-            sum += parseNonNegativeNumber(number);
+            if (number.matches("-\\d+")) {
+                negativeNumbers.add(number);
+            }
+            sum += Integer.parseInt(number);
+        }
+
+        if (!negativeNumbers.isEmpty()) {
+            throw new NegativeNumberException(negativeNumbers);
         }
 
         return sum;
-    }
-
-    private static int parseNonNegativeNumber(String number) {
-        int parsedNumber = Integer.parseInt(number);
-        if (parsedNumber < 0) {
-            throw new NegativeNumberException();
-        }
-
-        return parsedNumber;
     }
 
 }

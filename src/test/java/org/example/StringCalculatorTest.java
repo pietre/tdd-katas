@@ -79,4 +79,16 @@ public class StringCalculatorTest {
         }
     }
 
+    @Test
+    public void testContainsAllNegativeNumbersInExceptionMessage() {
+        String numbers = "//;\n1;-2;-5;-8";
+
+        try {
+            StringCalculator.add(numbers);
+            fail("Expected NegativeNumberException not thrown.");
+        } catch (NegativeNumberException ex) {
+            assertTrue(ex.getMessage().contains("-2, -5, -8"));
+        }
+    }
+
 }
