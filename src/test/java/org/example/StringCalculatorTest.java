@@ -15,4 +15,16 @@ public class StringCalculatorTest {
 
         assertEquals(expectedResult, result);
     }
+
+    @Test
+    public void testReturnsNumberForSingleNumber() {
+        String numbers = "1";
+        int expectedResult = 1;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+    }
+
+
 }
