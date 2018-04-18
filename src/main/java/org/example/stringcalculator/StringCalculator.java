@@ -1,4 +1,4 @@
-package org.example;
+package org.example.stringcalculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,10 +49,19 @@ public class StringCalculator {
     private static int addNumbersSplitByPattern(String numbersString, String splitPattern) {
         int sum = 0;
         for (String number : numbersString.split(splitPattern)) {
-            sum += Integer.parseInt(number);
+            sum += parseNonNegativeNumber(number);
         }
 
         return sum;
+    }
+
+    private static int parseNonNegativeNumber(String number) {
+        int parsedNumber = Integer.parseInt(number);
+        if (parsedNumber < 0) {
+            throw new NegativeNumberException();
+        }
+
+        return parsedNumber;
     }
 
 }
