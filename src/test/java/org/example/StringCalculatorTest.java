@@ -46,4 +46,14 @@ public class StringCalculatorTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testHandlesNewlineDelimiter() {
+        String numbers = "1\n2,3";
+        int expectedResult = 6;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+    }
+
 }
