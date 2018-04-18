@@ -56,4 +56,14 @@ public class StringCalculatorTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testSupportsCustomDelimiter() {
+        String numbers = "//;\n1;2";
+        int expectedResult = 3;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+    }
+
 }
