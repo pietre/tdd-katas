@@ -26,5 +26,24 @@ public class StringCalculatorTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testReturnsSumOfTwoNumbers() {
+        String numbers = "1,2";
+        int expectedResult = 3;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testReturnsSumOfManyNumbers() {
+        String numbers = "1,2,3,4,5";
+        int expectedResult = 15;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+    }
 
 }
