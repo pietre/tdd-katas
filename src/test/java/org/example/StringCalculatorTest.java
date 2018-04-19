@@ -92,14 +92,23 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void testSupportsMultipleCharacterDelimiter() {
+    public void testSupportsMultipleCharacterCustomDelimiter() {
         String numbers = "//;;;\n3;;;5\n6;;;7";
         int expectedResult = 21;
 
         int result = StringCalculator.add(numbers);
 
         assertEquals(expectedResult, result);
-
     }
 
+    //TODO: implement
+    @Test
+    public void testSupportsMultipleCustomDelimiters() {
+        String numbers = "//[;][<]\n2;4\n1<8,7";
+        int expectedResult = 22;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+    }
 }
