@@ -91,4 +91,15 @@ public class StringCalculatorTest {
         }
     }
 
+    @Test
+    public void testSupportsMultipleCharacterDelimiter() {
+        String numbers = "//;;;\n3;;;5\n6;;;7";
+        int expectedResult = 21;
+
+        int result = StringCalculator.add(numbers);
+
+        assertEquals(expectedResult, result);
+
+    }
+
 }
