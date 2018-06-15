@@ -20,6 +20,15 @@ public class SudokuValidatorTest {
     };
 
     @Test
+    public void returnsTrueForValidBoard() {
+        int[][] sudokuBoard = validBoard;
+
+        boolean result = SudokuValidator.check(sudokuBoard);
+
+        assertTrue(result);
+    }
+
+    @Test
     public void returnsFalseForNumbersOutOfAllowedRange() {
         int[][] sudokuBoard = validBoard;
         sudokuBoard[3][3] = 10;
