@@ -38,4 +38,23 @@ public class SudokuValidatorTest {
         assertFalse(result);
     }
 
+    @Test
+    public void returnsFalseForRowsContainingDuplicates() {
+        int[][] sudokuBoard = validBoard;
+        sudokuBoard[0][1] = 5;
+
+        boolean result = SudokuValidator.check(sudokuBoard);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void returnsFalseForColumnsContainingDuplicates() {
+        int[][] sudokuBoard = validBoard;
+        sudokuBoard[1][0] = 5;
+
+        boolean result = SudokuValidator.check(sudokuBoard);
+
+        assertFalse(result);
+    }
 }
