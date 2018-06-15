@@ -9,10 +9,19 @@ public class SudokuValidator {
     private static final int MAX_VALUE = 9;
     private static final int UNIQUE_ELEMENTS_COUNT = 9;
 
+    public static boolean check(int[][] board) {
+        try {
+            return checkWithExceptions(board);
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
     public static boolean checkWithExceptions(int[][] board) {
         validateNumbersRange(board);
         validateRows(board);
         validateColumns(board);
+        validateBlocks(board);
 
         return true;
     }
@@ -53,6 +62,23 @@ public class SudokuValidator {
             }
             if (set.size() != UNIQUE_ELEMENTS_COUNT) {
                 throw new IllegalArgumentException("columns");
+            }
+        }
+    }
+
+    private static void validateBlocks(int[][] board) {
+        Set<Integer> set;
+        for (int rowPosition = 0; rowPosition < 3; rowPosition++) {
+            for (int columnPosition = 0; columnPosition < 3; columnPosition++) {
+                set = new HashSet<>();
+                for (int columnIndex = 0; columnIndex < 3; columnIndex++) {
+                    for (int rowIndex = 0; rowIndex < 3; rowIndex++) {
+                        set.add(board[3*rowPosition + rowIndex][3*columnPosition + columnIndex]);
+                    }
+                }
+                if (set.size() != UNIQUE_ELEMENTS_COUNT) {
+                    throw new IllegalArgumentException("blocks");
+                }
             }
         }
     }
