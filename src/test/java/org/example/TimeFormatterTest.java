@@ -42,4 +42,60 @@ public class TimeFormatterTest {
 
         assertEquals("2 minutes", result);
     }
+
+    @Test
+    public void returnsHour() {
+        int seconds = 3600;
+
+        String result = TimeFormatter.formatDuration(seconds);
+
+        assertEquals("1 hour", result);
+    }
+
+
+    @Test
+    public void returnsHourMinutesAndSeconds() {
+        int seconds = 3662;
+
+        String result = TimeFormatter.formatDuration(seconds);
+
+        assertEquals("1 hour, 1 minute and 2 seconds", result);
+    }
+
+
+    @Test
+    public void returnsDaysHourMinutesAndSeconds() {
+        int seconds = 313713;
+
+        String result = TimeFormatter.formatDuration(seconds);
+
+        assertEquals("3 days, 15 hours, 8 minutes and 33 seconds", result);
+    }
+
+    @Test
+    public void returnsYears() {
+        int seconds = 94608000;
+
+        String result = TimeFormatter.formatDuration(seconds);
+
+        assertEquals("3 years", result);
+    }
+
+    @Test
+    public void returnsYearsDaysHourMinutesAndSeconds() {
+        int seconds = 199043275;
+
+        String result = TimeFormatter.formatDuration(seconds);
+
+        assertEquals("6 years, 113 days, 17 hours, 47 minutes and 55 seconds", result);
+    }
+
+    @Test
+    public void returnsNowOnZeroSeconds() {
+        int seconds = 0;
+
+        String result = TimeFormatter.formatDuration(seconds);
+
+        assertEquals("now", result);
+    }
 }

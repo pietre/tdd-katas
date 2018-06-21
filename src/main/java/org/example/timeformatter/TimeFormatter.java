@@ -1,14 +1,20 @@
 package org.example.timeformatter;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TimeFormatter {
 
-    private static final int SECONDS_PER_MINUTE = 60;
+    private Map<String, Integer> timeUnits = new LinkedHashMap<>();
     private List<String> formattedUnitsList = new ArrayList<>();
 
     private TimeFormatter() {
+        timeUnits.put("year", 31536000);
+        timeUnits.put("day", 86400);
+        timeUnits.put("hour", 3600);
+        timeUnits.put("minute", 60);
     }
 
     public static String formatDuration(int seconds) {
@@ -18,10 +24,14 @@ public class TimeFormatter {
     }
 
     private String getFormattedDuration(int seconds) {
-        if (seconds >= SECONDS_PER_MINUTE) {
-            int minutes = seconds / SECONDS_PER_MINUTE;
-            seconds %= SECONDS_PER_MINUTE;
-            appendFormattedUnit(getFormattedUnit(minutes, "minute"));
+        if (seconds == 0) {
+            return "now";
+        }
+        for (Map.Entry<String, Integer> entry : timeUnits.entrySet()) {
+            if (seconds >= entry.getValue()) {
+                appendFormattedUnit(getFormattedUnit(seconds / entry.getValue(), entry.getKey()));
+                seconds %= entry.getValue();
+            }
         }
         appendFormattedUnit(getFormattedUnit(seconds, "second"));
 
@@ -49,7 +59,7 @@ public class TimeFormatter {
         for (int i = 0; i < listSize; i++) {
             resultBuilder.append(formattedUnitsList.get(i));
             if (i < listSize - 2) {
-                resultBuilder.append(" , ");
+                resultBuilder.append(", ");
             } else if (i == listSize - 2) {
                 resultBuilder.append(" and ");
             }
